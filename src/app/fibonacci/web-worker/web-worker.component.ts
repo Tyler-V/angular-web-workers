@@ -24,11 +24,8 @@ export class FibonacciWebWorkerComponent implements OnInit {
     ngOnInit() { }
 
     calculate() {
-        this.stop();
+        this.reset();
         this.startTime = new Date().getTime();
-        this.results = [];
-        this.duration = 0;
-        this.progress = 0;
 
         for (let number = this.start; number < this.end + 1; number++) {
             const promise = this.webWorkerService.run(Fibonacci.calculate, number);
@@ -52,6 +49,13 @@ export class FibonacciWebWorkerComponent implements OnInit {
         });
         this.promises = [];
         this.results = [];
+    }
+
+    reset() {
+        this.stop();
+        this.startTime = 0;
+        this.duration = 0;
+        this.progress = 0;
     }
 }
 

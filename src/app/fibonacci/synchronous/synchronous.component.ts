@@ -21,10 +21,8 @@ export class FibonacciSynchronousComponent implements OnInit {
   ngOnInit() { }
 
   calculate() {
+    this.reset();
     this.startTime = new Date().getTime();
-    this.results = [];
-    this.duration = 0;
-    this.progress = 0;
 
     for (let number = this.start; number < this.end + 1; number++) {
       setTimeout(() => {
@@ -40,5 +38,12 @@ export class FibonacciSynchronousComponent implements OnInit {
         });
       });
     }
+  }
+
+  reset() {
+    this.results = [];
+    this.startTime = 0;
+    this.duration = 0;
+    this.progress = 0;
   }
 }
