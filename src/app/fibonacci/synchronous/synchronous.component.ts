@@ -30,14 +30,14 @@ export class FibonacciSynchronousComponent implements OnInit {
           number: number,
           result: Fibonacci.calculate(number)
         });
-        if (number < this.end) {
-          this.progress += (100 / (this.end - this.start));
-        }
-        setTimeout(() => {
-          this.duration = (new Date().getTime() - this.startTime) / 1000;
-        });
       });
+      if (number < this.end) {
+        this.progress += (100 / (this.end - this.start));
+      }
     }
+    setTimeout(() => {
+      this.duration = (new Date().getTime() - this.startTime) / 1000;
+    });
   }
 
   reset() {
