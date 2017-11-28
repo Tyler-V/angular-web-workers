@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="progress-bar">
+    <div class="fill" [style.width.%]="progress"></div>
+  </div>
+  <h2>Calculating Fibonacci using Web Workers</h2>
+  <form (ngSubmit)='calculate()'>
+    <div>
+      <span>Calculate from</span>
+      <input type='number' [(ngModel)]='start' name='start' />
+      <span>to</span>
+      <input type='number' [(ngModel)]='end' name='end' />
+    </div>
+    <div class="buttons">
+      <button type='submit'>Start</button>
+      <button type='button' (click)='stop()'>Stop</button>
+    </div>
+  </form>
+  <div>
+    <p *ngFor='let result of results'>
+      Fibonacci({{ result.number }}) = {{ result.result }}
+    </p>
+    <div *ngIf='duration' class="duration">Completed in {{ duration }} seconds.</div>
+  </div>
+</div>
