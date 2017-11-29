@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebWorkerService } from '../../web-worker/web-worker.service';
+import { WebWorkerService } from './web-worker.service';
 import { Fibonacci } from '../fibonacci';
 
 @Component({

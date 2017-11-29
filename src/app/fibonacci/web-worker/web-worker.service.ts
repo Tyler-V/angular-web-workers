@@ -1,11 +1,12 @@
-import { IWebWorkerService } from './web-worker.interface';
+import { Injectable } from '@angular/core';
 
-export class WebWorkerService implements IWebWorkerService {
+@Injectable()
+export class WebWorkerService {
     private workerFunctionToUrlMap = new WeakMap<Function, string>();
     private promiseToWorkerMap = new WeakMap<Promise<any>, Worker>();
 
-    run<T>(workerFunction: (input: any) => T, data?: any): Promise<T> {
-        const url = this.getOrCreateWorkerUrl(workerFunction);
+    run<T>(fn: (input: any) => void, data?: any): Promise<T> {
+        const url = this.getOrCreateWorkerUrl(fn);
         return this.runUrl(url, data);
     }
 
@@ -48,8 +49,8 @@ export class WebWorkerService implements IWebWorkerService {
         return this.workerFunctionToUrlMap.get(fn);
     }
 
-    private createWorkerUrl(resolve: Function): string {
-        const resolveString = resolve.toString();
+    private createWorkerUrl(fn: Function): string {
+        const resolveString = fn.toString();
         const webWorkerTemplate = `
             self.addEventListener('message', function(e) {
                 postMessage((${resolveString})(e.data));
